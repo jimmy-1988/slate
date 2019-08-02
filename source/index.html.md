@@ -1,5 +1,18 @@
-<center> <h1>PeerAssets</h1> </center>
-<sub><center><h3>Peer-to-peer Assets</h3></center></sub>
+---
+title: Peer-to-peer Assets
+
+toc_footers:
+  - <a href='#'>Sign Up for a Developer Key</a>
+  - <a href='https://github.com/xpeerchain'>Documentation Powered by Slate</a>
+
+includes:
+  - errors
+
+search: true
+---
+
+<h1>PeerAssets</h1>
+<sub><h3>Peer-to-peer Assets</h3></sub>
 
 by: Scott Team  <scott@xpeer.org>,  April, 2019.
 
@@ -107,9 +120,9 @@ The OP_RETURN transaction carries descriptive metadata like name, url, etc. The 
 
 Example:
 
- > Bob writes the message that he is issuing an asset and publishes it on the blockchain. To write it on the blockchain, Bob will send a transaction which carries needed data. The message includes the name of the asset and other optional metadata like url of the asset page or forum post. In the following representation, payment to the P2TH derived address is equal to "Hey!". You can think of it as a secret code, one which is understood by all the PeerAsset protocol aware clients to have a specific meaning, in this case that this transaction is about PeerAssets. Deck spawning starts the asset timeline, starting from block height when transaction was included and progressing linearly to the future. Due to nature of the blockchain this message is now permanent and immutable.
+Bob writes the message that he is issuing an asset and publishes it on the blockchain. To write it on the blockchain, Bob will send a transaction which carries needed data. The message includes the name of the asset and other optional metadata like url of the asset page or forum post. In the following representation, payment to the P2TH derived address is equal to "Hey!". You can think of it as a secret code, one which is understood by all the PeerAsset protocol aware clients to have a specific meaning, in this case that this transaction is about PeerAssets. Deck spawning starts the asset timeline, starting from block height when transaction was included and progressing linearly to the future. Due to nature of the blockchain this message is now permanent and immutable.
 
-> ![Bob declares the asset](DeckSpawning.png)
+![Bob declares the asset](DeckSpawning.png)
 
 <sub>Figure 2. Bob declares the asset</sub>
 
@@ -143,7 +156,7 @@ Card issue transaction pays to:
 
 Example:
 
-> Bob decides to issue 1000 "yellow rabbit" assets. He sends 1000 "yellow rabbit" tokens from the spawning address to his other address, making him the original owner of the "yellow rabbit" assets. After this event, by reading the timeline of the asset it can be verified that 1) There are 1000 "yellow rabbit" assets, 2) Bob now holds 1000 of those assets, 3) The issuing address now has a balance of -1000 "yellow rabbit" assets.
+Bob decides to issue 1000 "yellow rabbit" assets. He sends 1000 "yellow rabbit" tokens from the spawning address to his other address, making him the original owner of the "yellow rabbit" assets. After this event, by reading the timeline of the asset it can be verified that 1) There are 1000 "yellow rabbit" assets, 2) Bob now holds 1000 of those assets, 3) The issuing address now has a balance of -1000 "yellow rabbit" assets.
 
 An issuing address is allowed to have a negative balance, and it serves as a checksum for the entire timeline, as it is possible to verify the final balance against it.
 
@@ -170,9 +183,9 @@ Card transferring transaction pays to:
 
 Example:
 
-> Alice and everyone else on the network can now see that Bob has issued an asset with a specific name, quantity and other metadata. It is verifiable that Bob owns the full quantity of the "yellow rabbit" asset. Alice wants to trade with Bob for a specific quantity of the asset, and Bob agrees to trade so he can send Alice some of his assets. Bob now writes the message, with attached metadata stating the quantity of the asset being transferred, as well as the transaction ID of the asset's deck spawn transaction (asset ID).
+Alice and everyone else on the network can now see that Bob has issued an asset with a specific name, quantity and other metadata. It is verifiable that Bob owns the full quantity of the "yellow rabbit" asset. Alice wants to trade with Bob for a specific quantity of the asset, and Bob agrees to trade so he can send Alice some of his assets. Bob now writes the message, with attached metadata stating the quantity of the asset being transferred, as well as the transaction ID of the asset's deck spawn transaction (asset ID).
 
-> ![Bob transfers a card to Alice](CardTransfer.png)
+![Bob transfers a card to Alice](CardTransfer.png)
 
 <sub>Figure 3. Bob transfers a card to Alice</sub>
 
@@ -192,18 +205,18 @@ As a consequence of this mechanism, losing control of the address that has one's
 
 What if Alice decides to double spend her assets, and how to verify that someone owns an asset?
 For example,
-> Alice agrees to trade 10 of her "yellow rabbit" assets with David for his 25 "marble" assets, and 10 of those same "yellow rabbit" assets back to Bob for another batch of 30 "marble" assets. In this example, Alice is trying to double spend her 10 "yellow rabbit" assets. How will Bob and David protect themselves from being cheated?
+Alice agrees to trade 10 of her "yellow rabbit" assets with David for his 25 "marble" assets, and 10 of those same "yellow rabbit" assets back to Bob for another batch of 30 "marble" assets. In this example, Alice is trying to double spend her 10 "yellow rabbit" assets. How will Bob and David protect themselves from being cheated?
 The asset ID of the "marble" asset is publicly known, as it was publicly published by the asset issuer and referenced to Alice at the moment they were sent to her. Alice must check if David really controls 25 "marble" assets, and to do that Alice must know two facts:
 
-> David's address: P9ffxiPYxk3EK4iro83vAszFY2i4XNKVGd
+David's address: P9ffxiPYxk3EK4iro83vAszFY2i4XNKVGd
 
-> Asset ID: 548ad20c2081d88bd053520d9b33f2e7b59ebd819dc3a87f68c0d8cd152523fd
+Asset ID: 548ad20c2081d88bd053520d9b33f2e7b59ebd819dc3a87f68c0d8cd152523fd
 
 What is lacking is the proof that the timeline assigns the asset to David.
 
 The next step is to verify that David owns the given amount of "marble" assets. Alice does this by verifying *proof-of-timeline* for David's address and asset ID. By knowing the transaction ID of this deck's spawning transaction, Alice knows where to start traversing. Alice starts traversing from block height of 223400 until the current block height.
 
-> ![Alice traverses the blockchain](TraversingBlockchain.png)
+![Alice traverses the blockchain](TraversingBlockchain.png)
 
 <sub>Figure 4. Alice traverses the blockchain</sub>
 
